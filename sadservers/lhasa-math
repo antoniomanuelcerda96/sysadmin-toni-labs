@@ -1,0 +1,59 @@
+# Lhasa - Easy Math
+
+## Objetivo
+
+Calcular la media aritmética de los valores de la segunda columna del fichero `/home/admin/scores.txt` y guardar el resultado en `/home/admin/solution`.
+
+## Herramientas utilizadas
+
+- awk
+- echo
+
+## Análisis
+
+El fichero contenía dos columnas:
+
+- Primera columna: número de línea.
+- Segunda columna: puntuación.
+
+Para resolver el ejercicio fue necesario:
+
+1. Extraer la segunda columna.
+2. Sumar todos los valores.
+3. Contar el número de registros.
+4. Calcular la media.
+5. Guardar el resultado en el fichero solicitado.
+
+## Solución
+
+Se utilizó AWK para sumar todos los valores de la segunda columna y dividirlos entre el número total de líneas:
+
+```bash
+awk '{suma += $2} END {print suma/NR}' /home/admin/scores.txt
+```
+
+### Explicación
+
+- `$2` representa la segunda columna.
+- `suma` almacena la suma acumulada.
+- `NR` representa el número total de registros procesados.
+- `END` ejecuta el cálculo al finalizar la lectura del fichero.
+
+## Aprendizaje
+
+Durante este escenario practiqué:
+
+- Procesamiento de columnas con AWK.
+- Uso de variables dentro de AWK.
+- Uso de `NR` para contar registros.
+- Cálculo de medias sobre datos tabulares.
+- Resolución de problemas mediante herramientas nativas de Linux.
+
+## Competencias desarrolladas
+
+- Linux CLI
+- Bash
+- AWK
+- Data Processing
+- Troubleshooting
+- Problem Solving
