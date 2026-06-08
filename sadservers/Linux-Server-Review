@@ -1,0 +1,128 @@
+# SadServers - Linux Server Review
+
+## Objetivo
+
+Realizar una auditoría inicial de un servidor Linux para identificar su propósito, analizar el estado de los recursos del sistema y determinar los servicios que se encuentran en ejecución.
+
+## Entorno
+
+- Sistema Operativo: Debian GNU/Linux 11 (Bullseye)
+- Arquitectura: x86_64
+- CPU: AMD EPYC 7571 (2 vCPU)
+- Memoria RAM: 455 MB
+- Acceso mediante SSH
+- Permisos sudo disponibles
+
+## Metodología
+
+Durante la revisión se llevaron a cabo las siguientes tareas:
+
+1. Identificación del sistema operativo y hardware.
+2. Comprobación del uso de CPU, memoria y almacenamiento.
+3. Revisión de la carga del sistema.
+4. Enumeración de servicios activos.
+5. Identificación de puertos en escucha.
+6. Análisis de procesos con mayor consumo de recursos.
+7. Revisión de la aplicación principal alojada en el servidor.
+
+## Comandos utilizados
+
+```bash
+hostname
+cat /etc/os-release
+free -h
+df -h
+uptime
+lscpu
+sudo ss -tulnp
+systemctl list-units --type=service --state=running
+htop
+ps aux --sort=-%cpu | head -10
+ps aux --sort=-%mem | head -10
+cat /home/admin/webapp.py
+```
+
+## Hallazgos
+
+### Recursos del sistema
+
+La memoria RAM y el almacenamiento presentaban un uso normal.
+
+- RAM utilizada: 148 MB de 455 MB.
+- Partición raíz utilizada: 34%.
+- Espacio libre disponible: 4.9 GB.
+
+No se detectaron problemas relacionados con memoria o almacenamiento.
+
+### Rendimiento
+
+Se detectó una carga del sistema elevada:
+
+```text
+Load Average: 12.29 9.33 4.65
+```
+
+Teniendo en cuenta que el servidor dispone únicamente de 2 CPU, se procedió a investigar los procesos responsables de dicha carga.
+
+### Procesos relevantes
+
+Los procesos con mayor consumo de CPU fueron:
+
+- Python3 (webapp.py)
+- PostgreSQL
+- HAProxy
+
+La aplicación principal desarrollada en Python consumía aproximadamente un 53% de CPU.
+
+### Servicios identificados
+
+Se detectaron los siguientes servicios activos:
+
+- SSH
+- PostgreSQL
+- HAProxy
+- Docker
+- Webapp
+- Worker
+
+### Puertos abiertos
+
+| Puerto | Servicio |
+|----------|----------|
+| 22 | SSH |
+| 5432 | PostgreSQL |
+| 8000 | HAProxy |
+| 9000 | Aplicación Flask |
+
+## Análisis de la aplicación
+
+Se revisó el código fuente de la aplicación principal ubicada en:
+
+```text
+/home/admin/webapp.py
+```
+
+La aplicación está desarrollada en Python utilizando Flask y realiza conexiones a una base de datos PostgreSQL mediante psycopg2.
+
+Su funcionamiento consiste en:
+
+- Establecer conexión con PostgreSQL.
+- Ejecutar consultas SQL.
+- Actualizar un contador de tráfico.
+- Devolver el resultado mediante una aplicación web.
+
+## Conclusión
+
+Tras la auditoría se determinó que el servidor aloja una aplicación web basada en Flask conectada a una base de datos PostgreSQL. La infraestructura utiliza además HAProxy como proxy y Docker para la gestión de contenedores.
+
+No se detectaron problemas de memoria ni almacenamiento. Se observó una carga elevada del sistema, siendo la aplicación web el proceso con mayor consumo de CPU, por lo que sería recomendable continuar monitorizando su comportamiento en producción.
+
+## Conocimientos reforzados
+
+- Auditoría básica de servidores Linux.
+- Identificación de servicios y procesos.
+- Monitorización de recursos.
+- Análisis de puertos abiertos.
+- Troubleshooting de rendimiento.
+- Relación entre aplicaciones web y bases de datos.
+- Uso de herramientas de administración Linux.
