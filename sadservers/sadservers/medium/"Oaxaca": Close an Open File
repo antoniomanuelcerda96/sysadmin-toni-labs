@@ -1,0 +1,139 @@
+# Oaxaca - Close an Open File
+
+## Objetivo
+
+Identificar y cerrar un archivo que estaba siendo utilizado por un proceso sin finalizar dicho proceso.
+
+El archivo afectado era:
+
+```text
+/home/admin/somefile
+```
+
+## Herramientas utilizadas
+
+- lsof
+- ps
+- /proc
+- ls
+
+## Análisis
+
+El escenario indicaba que el archivo estaba abierto para escritura por algún proceso y que debía cerrarse sin terminar dicho proceso.
+
+La primera comprobación consistió en identificar qué proceso mantenía abierto el archivo:
+
+```bash
+lsof /home/admin/somefile
+```
+
+Resultado:
+
+```text
+bash    800 admin   77w   REG   ...   /home/admin/somefile
+```
+
+Se identificó:
+
+- Proceso: bash
+- PID: 800
+- Descriptor de fichero: 77
+- Modo: escritura (`w`)
+
+## Investigación
+
+Se verificó la información del proceso:
+
+```bash
+ps -fp 800
+```
+
+Posteriormente se inspeccionaron los descriptores de fichero abiertos por el proceso:
+
+```bash
+ls -l /proc/800/fd
+```
+
+También se comprobó el descriptor concreto:
+
+```bash
+ls -l /proc/800/fd/77
+```
+
+confirmando que apuntaba a:
+
+```text
+/home/admin/somefile
+```
+
+Se revisó además la información asociada al descriptor:
+
+```bash
+cat /proc/800/fdinfo/77
+```
+
+## Verificación
+
+Finalmente se volvió a comprobar si el archivo continuaba abierto:
+
+```bash
+lsof /home/admin/somefile
+```
+
+Resultado:
+
+```text
+(no output)
+```
+
+El archivo ya no estaba siendo utilizado por ningún proceso.
+
+## Aprendizaje
+
+Durante este escenario practiqué:
+
+- Uso de `lsof` para identificar archivos abiertos.
+- Identificación de procesos mediante PID.
+- Exploración de `/proc`.
+- Gestión e investigación de file descriptors.
+- Técnicas de troubleshooting en Linux.
+
+## Conceptos aprendidos
+
+### File Descriptors
+
+Linux gestiona los archivos abiertos mediante descriptores de fichero (FD).
+
+En este escenario el descriptor utilizado era:
+
+```text
+FD 77
+```
+
+y estaba asociado al archivo:
+
+```text
+/home/admin/somefile
+```
+
+### Directorio /proc
+
+El directorio `/proc` permite inspeccionar información de procesos en ejecución.
+
+Se utilizaron:
+
+```text
+/proc/800/fd
+/proc/800/fdinfo
+```
+
+para investigar el descriptor abierto.
+
+## Competencias desarrolladas
+
+- Linux Administration
+- Troubleshooting
+- Process Analysis
+- File Descriptor Management
+- Linux Internals
+- Problem Solving
