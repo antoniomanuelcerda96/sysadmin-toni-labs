@@ -1,0 +1,127 @@
+# Bandit Level 4 - Hidden Files
+
+## Objetivo
+
+Obtener la contraseña del siguiente nivel almacenada en un archivo oculto dentro del directorio `inhere`.
+
+## Conceptos trabajados
+
+- Navegación entre directorios.
+- Archivos ocultos en Linux.
+- Listado avanzado de archivos.
+- Lectura de archivos mediante `cat`.
+
+## Análisis
+
+El enunciado indicaba que la contraseña se encontraba en un archivo oculto dentro del directorio `inhere`.
+
+Al listar el contenido del directorio mediante `ls`, el archivo no era visible, ya que Linux oculta por defecto los archivos cuyo nombre comienza por un punto (`.`).
+
+Fue necesario utilizar una opción adicional del comando `ls` para visualizar los archivos ocultos.
+
+## Solución
+
+Acceder al directorio:
+
+```bash
+cd inhere
+```
+
+Mostrar todos los archivos, incluidos los ocultos:
+
+```bash
+ls -a
+```
+
+Leer el contenido del archivo oculto:
+
+```bash
+cat .Hiding-From-You
+```
+
+## Explicación
+
+- `cd` cambia al directorio indicado.
+- `ls -a` muestra todos los archivos, incluidos los ocultos.
+- En Linux, cualquier archivo cuyo nombre comienza por `.` se considera oculto.
+- `cat` permite visualizar el contenido del archivo.
+
+## Aprendizaje
+
+Durante este nivel aprendí que Linux no elimina ni protege los archivos ocultos; simplemente deja de mostrarlos en un listado normal. Para administrarlos es necesario utilizar la opción `-a` del comando `ls`.
+
+## Uso en administración de sistemas
+
+Los archivos ocultos son muy habituales en Linux y suelen almacenar configuraciones importantes del usuario o de aplicaciones.
+
+Ejemplos comunes:
+
+```text
+.bashrc
+.profile
+.gitconfig
+.ssh/
+.cache/
+```
+
+Como administrador de sistemas es frecuente revisar estos archivos para modificar configuraciones, solucionar incidencias o administrar claves SSH.
+
+## Comandos aprendidos
+
+### cd
+
+**Función**
+
+Permite cambiar entre directorios.
+
+**Sintaxis**
+
+```bash
+cd ruta
+```
+
+---
+
+### ls
+
+**Función**
+
+Lista el contenido de un directorio.
+
+**Opciones utilizadas**
+
+```bash
+-a
+```
+
+Muestra también los archivos ocultos.
+
+Opcionalmente puede utilizarse:
+
+```bash
+-la
+```
+
+Para mostrar la información detallada de cada archivo.
+
+---
+
+### cat
+
+**Función**
+
+Muestra el contenido de uno o varios archivos.
+
+**Sintaxis**
+
+```bash
+cat archivo
+```
+
+## Competencias desarrolladas
+
+- Linux CLI
+- Gestión de archivos ocultos
+- Navegación por el sistema de archivos
+- Administración básica de Linux
+- Interpretación de la estructura del sistema de archivos
