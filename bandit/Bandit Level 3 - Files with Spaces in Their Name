@@ -1,0 +1,104 @@
+# Bandit Level 3 - Files with Spaces in Their Name
+
+## Objetivo
+
+Obtener la contraseña del siguiente nivel almacenada en un archivo llamado:
+
+```text
+--spaces in this filename--
+```
+
+ubicado en el directorio personal.
+
+## Conceptos trabajados
+
+- Nombres de archivos con espacios.
+- Rutas relativas.
+- Interpretación de argumentos por la shell.
+- Uso del comando `cat`.
+
+## Análisis
+
+El archivo que contenía la contraseña tenía un nombre poco habitual:
+
+```text
+--spaces in this filename--
+```
+
+Este nombre presenta dos dificultades:
+
+- Contiene espacios.
+- Comienza por `--`, lo que puede hacer que el comando interprete el nombre como una opción en lugar de como un archivo.
+
+Para acceder correctamente fue necesario indicar que se trataba de un archivo del directorio actual mediante una ruta relativa.
+
+## Solución
+
+Comprobar el contenido del directorio:
+
+```bash
+ls
+```
+
+Mostrar el contenido del archivo:
+
+```bash
+cat ./"--spaces in this filename--"
+```
+
+## Explicación
+
+- `.` representa el directorio actual.
+- `./` indica que el argumento hace referencia a un archivo y no a una opción del comando.
+- Las comillas permiten que Bash interprete todo el nombre, incluidos los espacios, como un único argumento.
+- `cat` muestra el contenido del archivo.
+
+## Aprendizaje
+
+Durante este nivel aprendí que Bash interpreta los espacios como separadores de argumentos y que algunos nombres de archivo pueden confundirse con opciones de un comando. Utilizar rutas relativas (`./`) y comillas permite acceder correctamente a este tipo de archivos.
+
+## Uso en administración de sistemas
+
+Es posible encontrar archivos con espacios o caracteres especiales, especialmente cuando han sido creados por aplicaciones o usuarios.
+
+Para evitar problemas es recomendable:
+
+- Utilizar rutas relativas (`./`).
+- Encerrar el nombre entre comillas cuando contiene espacios.
+- Escapar los espacios mediante `\` cuando sea necesario.
+
+## Comandos aprendidos
+
+### ls
+
+**Función**
+
+Lista el contenido del directorio actual.
+
+**Sintaxis**
+
+```bash
+ls [opciones]
+```
+
+---
+
+### cat
+
+**Función**
+
+Muestra el contenido de uno o varios archivos.
+
+**Sintaxis**
+
+```bash
+cat archivo
+```
+
+## Competencias desarrolladas
+
+- Linux CLI
+- Gestión de archivos
+- Rutas relativas
+- Manejo de nombres de archivos especiales
+- Administración básica de Linux
