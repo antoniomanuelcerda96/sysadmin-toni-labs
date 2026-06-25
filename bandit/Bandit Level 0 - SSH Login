@@ -1,0 +1,55 @@
+# Bandit Level 0 - SSH Login
+
+## Objetivo
+
+Conectarse al servidor de Bandit utilizando el protocolo SSH para acceder al entorno del laboratorio.
+
+## Conceptos trabajados
+
+- SSH (Secure Shell)
+- Conexión remota a un servidor Linux
+- Autenticación mediante usuario y contraseña
+- Puerto de conexión personalizado
+
+## Análisis
+
+El primer nivel consiste únicamente en establecer una conexión SSH con el servidor de OverTheWire utilizando las credenciales proporcionadas.
+
+En este laboratorio se utiliza el puerto *2220* en lugar del puerto SSH por defecto (*22*), por lo que es necesario especificarlo en el comando de conexión.
+
+## Solución
+
+```bash
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+```
+
+Contraseña:
+
+```text
+bandit0
+```
+
+## Explicación
+
+- `ssh` inicia una conexión segura mediante el protocolo Secure Shell.
+- `bandit0` es el usuario con el que se inicia la sesión.
+- `bandit.labs.overthewire.org` es el servidor remoto.
+- `-p 2220` indica que la conexión debe realizarse utilizando el puerto 2220.
+
+Una vez autenticado correctamente, se obtiene acceso a la terminal del servidor Linux para continuar con el siguiente nivel.
+
+## Aprendizaje
+
+Durante este nivel aprendí a:
+
+- Conectarme a un servidor Linux mediante SSH.
+- Utilizar un puerto distinto al predeterminado.
+- Comprender la estructura básica de un comando SSH.
+
+## Competencias desarrolladas
+
+- Linux CLI
+- SSH
+- Acceso remoto
+- Administración de sistemas
+- Networking básico
