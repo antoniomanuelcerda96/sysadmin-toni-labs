@@ -1,0 +1,56 @@
+# Bandit Level 1 - Reading a File
+
+## Objetivo
+
+Encontrar la contraseña del siguiente nivel almacenada en un archivo llamado `readme` ubicado en el directorio personal.
+
+## Conceptos trabajados
+
+- Navegación por el sistema de archivos.
+- Listado de archivos.
+- Lectura de archivos mediante `cat`.
+
+## Análisis
+
+El enunciado indicaba que la contraseña estaba almacenada en un archivo llamado `readme`.
+
+Primero se comprobó el contenido del directorio personal para localizar el archivo y posteriormente se visualizó su contenido.
+
+## Solución
+
+Listar el contenido del directorio:
+
+```bash
+ls
+```
+
+Mostrar el contenido del archivo:
+
+```bash
+cat readme
+```
+
+## Explicación
+
+- `ls` muestra el contenido del directorio actual.
+- `cat` imprime el contenido de un archivo en la terminal.
+
+## Aprendizaje
+
+Durante este nivel aprendí a localizar un archivo en el directorio actual y visualizar su contenido utilizando comandos básicos de Linux.
+
+## Uso en administración de sistemas
+
+El comando `cat` se utiliza frecuentemente para:
+
+- Consultar archivos de configuración.
+- Leer pequeños archivos de texto.
+- Ver información del sistema.
+- Revisar scripts y configuraciones.
+
+## Competencias desarrolladas
+
+- Linux CLI
+- Gestión de archivos
+- Lectura de información
+- Administración básica de Linux
