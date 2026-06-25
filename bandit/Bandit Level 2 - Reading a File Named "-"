@@ -1,0 +1,112 @@
+# Bandit Level 2 - Reading a File Named "-"
+
+## Objetivo
+
+Obtener la contraseña del siguiente nivel almacenada en un archivo llamado `-` ubicado en el directorio personal.
+
+## Conceptos trabajados
+
+- Rutas relativas.
+- Interpretación de argumentos en Linux.
+- Uso del comando `cat`.
+- Directorio actual (`.`).
+
+## Análisis
+
+El archivo que contenía la contraseña tenía un nombre poco habitual:
+
+```text
+-
+```
+
+Al intentar leerlo directamente mediante:
+
+```bash
+cat -
+```
+
+el comando interpreta el carácter `-` como la entrada estándar (`stdin`) y no como el nombre de un archivo.
+
+Para evitar esta ambigüedad fue necesario indicar la ruta relativa del archivo.
+
+## Solución
+
+Comprobar el contenido del directorio:
+
+```bash
+ls
+```
+
+Leer el archivo:
+
+```bash
+cat ./-
+```
+
+## Explicación
+
+- `.` representa el directorio actual.
+- `./-` indica que `-` es un archivo ubicado en el directorio actual.
+- `cat` muestra el contenido del archivo por la salida estándar.
+
+Al especificar la ruta relativa, Linux deja de interpretar `-` como una opción o como la entrada estándar y lo trata como un nombre de archivo.
+
+## Aprendizaje
+
+Durante este nivel aprendí que algunos caracteres tienen un significado especial para los comandos de Linux y que el uso de rutas relativas permite eliminar ambigüedades al acceder a archivos.
+
+## Uso en administración de sistemas
+
+Este tipo de situaciones puede aparecer cuando existen archivos cuyos nombres comienzan por caracteres especiales como:
+
+```text
+-
+--
+-rf
+```
+
+En estos casos es recomendable acceder al archivo utilizando una ruta relativa (`./archivo`) o indicando explícitamente el final de las opciones mediante `--`, evitando que el comando interprete el nombre como una opción.
+
+## Comandos aprendidos
+
+### ls
+
+**Función**
+
+Lista el contenido de un directorio.
+
+**Sintaxis**
+
+```bash
+ls [opciones] [ruta]
+```
+
+**Uso real**
+
+Permite inspeccionar directorios y localizar archivos antes de trabajar con ellos.
+
+---
+
+### cat
+
+**Función**
+
+Muestra el contenido de uno o varios archivos.
+
+**Sintaxis**
+
+```bash
+cat archivo
+```
+
+**Uso real**
+
+Se utiliza para consultar archivos de configuración, scripts, pequeños logs y otra información del sistema.
+
+## Competencias desarrolladas
+
+- Linux CLI
+- Gestión de archivos
+- Rutas relativas
+- Interpretación de argumentos
+- Administración básica de Linux
