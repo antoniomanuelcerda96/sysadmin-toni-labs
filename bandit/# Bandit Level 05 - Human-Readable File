@@ -1,0 +1,153 @@
+# Bandit Level 05 - Human-Readable File
+
+## Objective
+
+Retrieve the password for the next level. The password is stored in the only human-readable file inside the `inhere` directory.
+
+---
+
+## Skills Practiced
+
+- Identifying file types
+- Using the `file` command
+- Reading text files with `cat`
+- Working with files whose names begin with `-`
+
+---
+
+## Analysis
+
+The challenge states that the password is stored in the **only human-readable file** inside the `inhere` directory.
+
+Listing the directory contents with `ls` is not enough because it only shows the filenames.
+
+To determine which file contains readable text, the `file` command was used to inspect every file in the directory.
+
+Among all files, only one was identified as **ASCII text**, making it the most likely candidate to contain the password.
+
+Since the filename starts with a hyphen (`-`), it must be referenced using a relative path (`./`) to prevent `cat` from interpreting it as a command option.
+
+---
+
+## Solution
+
+List the files:
+
+```bash
+ls
+```
+
+Identify their file types:
+
+```bash
+file ./*
+```
+
+Read the human-readable file:
+
+```bash
+cat ./-file07
+```
+
+---
+
+## Explanation
+
+### `file`
+
+Determines the type of a file based on its contents rather than its extension.
+
+Example:
+
+```bash
+file ./-file07
+```
+
+Output:
+
+```text
+ASCII text
+```
+
+---
+
+### `cat`
+
+Displays the contents of a text file.
+
+Because the filename begins with `-`, it must be accessed using:
+
+```bash
+./-file07
+```
+
+instead of:
+
+```bash
+-file07
+```
+
+---
+
+## What I Learned
+
+- How to identify file types using the `file` command.
+- The difference between binary data and human-readable text.
+- Why filenames beginning with `-` require a relative path (`./`) when passed to commands.
+
+---
+
+## Real-World Usage
+
+The `file` command is commonly used by Linux administrators to:
+
+- Identify unknown files.
+- Verify downloaded files.
+- Determine executable formats.
+- Inspect log files and configuration files.
+- Troubleshoot file-related issues.
+
+---
+
+## Commands Learned
+
+### `file`
+
+**Purpose**
+
+Identify the type of a file.
+
+**Syntax**
+
+```bash
+file <filename>
+```
+
+Example:
+
+```bash
+file backup.tar.gz
+```
+
+---
+
+### `cat`
+
+**Purpose**
+
+Display the contents of a text file.
+
+**Syntax**
+
+```bash
+cat <filename>
+```
+
+---
+
+## Skills Developed
+
+- Linux Command Line
+- File Inspection
+- Troubleshooting
+- System Administration Fundamentals
