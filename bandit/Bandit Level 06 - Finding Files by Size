@@ -1,0 +1,144 @@
+# Bandit Level 06 - Finding Files by Size
+
+## Objective
+
+Retrieve the password for the next level. The password is stored in a file somewhere under the `inhere` directory with the following properties:
+
+- Human-readable
+- Exactly **1033 bytes**
+- Not executable
+
+---
+
+## Skills Practiced
+
+- Searching files using the `find` command
+- Filtering files by size
+- Filtering by file type
+- Reading file contents with `cat`
+
+---
+
+## Analysis
+
+The challenge provides specific file attributes instead of a filename.
+
+Rather than inspecting every file manually, the `find` command was used to search for files matching the required criteria.
+
+Since the search was performed inside the `inhere` directory, the current directory (`.`) was used as the starting point.
+
+The command filtered only regular files (`-type f`) with an exact size of **1033 bytes** (`-size 1033c`).
+
+Once the correct file was found, its contents were displayed using `cat`.
+
+---
+
+## Solution
+
+Search for the file:
+
+```bash
+find . -type f -size 1033c
+```
+
+Read its contents:
+
+```bash
+cat ./maybehere07/.file2
+```
+
+---
+
+## Explanation
+
+### `find`
+
+Searches recursively through directories for files that match one or more conditions.
+
+In this challenge:
+
+- `.` → Search starts from the current directory.
+- `-type f` → Search only regular files.
+- `-size 1033c` → Search files with an exact size of **1033 bytes** (`c` = bytes).
+
+---
+
+### `cat`
+
+Displays the contents of the file containing the password.
+
+---
+
+## What I Learned
+
+- How to search for files recursively.
+- How to filter search results by file type.
+- How to search for files with an exact size.
+- Why `find` is much more efficient than manually inspecting directories.
+
+---
+
+## Real-World Usage
+
+The `find` command is one of the most frequently used tools by Linux system administrators.
+
+Common use cases include:
+
+- Finding configuration files.
+- Searching for log files.
+- Locating files by size.
+- Finding files owned by a specific user.
+- Searching for recently modified files.
+- Automating administrative tasks in shell scripts.
+
+---
+
+## Commands Learned
+
+### `find`
+
+**Purpose**
+
+Search for files and directories recursively.
+
+**Syntax**
+
+```bash
+find <path> [conditions]
+```
+
+Examples:
+
+```bash
+find . -type f
+
+find /etc -name "*.conf"
+
+find /var/log -type f -mtime -7
+
+find /home -user antonio
+```
+
+---
+
+### `cat`
+
+**Purpose**
+
+Display the contents of a text file.
+
+**Syntax**
+
+```bash
+cat <filename>
+```
+
+---
+
+## Skills Developed
+
+- Linux Command Line
+- File Searching
+- Troubleshooting
+- Linux File System
+- System Administration Fundamentals
