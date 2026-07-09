@@ -1,0 +1,148 @@
+# Bandit Level 07 - Finding Files by Owner, Group and Size
+
+## Objective
+
+Retrieve the password for the next level. The password is stored somewhere on the server with the following properties:
+
+- Owned by user `bandit7`
+- Owned by group `bandit6`
+- Exactly **33 bytes** in size
+
+---
+
+## Skills Practiced
+
+- Recursive file searching
+- Filtering by owner
+- Filtering by group
+- Filtering by file size
+- Reading file contents with `cat`
+
+---
+
+## Analysis
+
+Unlike previous levels, the filename and location were unknown.
+
+Instead of searching manually, the `find` command was used to search the entire filesystem while filtering files according to the properties provided in the challenge.
+
+The search criteria included:
+
+- File owner
+- File group
+- File size
+
+Once the correct file was located, its contents were displayed using `cat`.
+
+---
+
+## Solution
+
+Search the entire filesystem:
+
+```bash
+find / -user bandit7 -group bandit6 -size 33c
+```
+
+Read the file:
+
+```bash
+cat <path_to_the_file>
+```
+
+---
+
+## Explanation
+
+### `find`
+
+Searches recursively through the filesystem and filters results according to specified conditions.
+
+In this challenge:
+
+- `/` → Start searching from the filesystem root.
+- `-user bandit7` → Files owned by user **bandit7**.
+- `-group bandit6` → Files belonging to group **bandit6**.
+- `-size 33c` → Files with an exact size of **33 bytes** (`c` = bytes).
+
+---
+
+### `cat`
+
+Displays the contents of the file containing the password.
+
+---
+
+## What I Learned
+
+- How to combine multiple search conditions with `find`.
+- How Linux stores metadata such as file ownership and group ownership.
+- How to locate files efficiently without knowing their names or locations.
+
+---
+
+## Real-World Usage
+
+System administrators frequently use `find` to:
+
+- Locate files owned by a specific user.
+- Audit file permissions.
+- Search for files with unusual sizes.
+- Investigate storage issues.
+- Perform security and compliance checks.
+- Automate administrative tasks.
+
+---
+
+## Commands Learned
+
+### `find`
+
+**Purpose**
+
+Search for files and directories recursively using one or more filters.
+
+**Syntax**
+
+```bash
+find <path> [conditions]
+```
+
+Examples:
+
+```bash
+find /home -user antonio
+
+find /var/log -type f
+
+find /etc -name "*.conf"
+
+find /tmp -size +100M
+
+find / -group developers
+```
+
+---
+
+### `cat`
+
+**Purpose**
+
+Display the contents of one or more text files.
+
+**Syntax**
+
+```bash
+cat <filename>
+```
+
+---
+
+## Skills Developed
+
+- Linux Command Line
+- File Searching
+- Linux File Permissions
+- User and Group Management
+- Troubleshooting
+- System Administration Fundamentals
