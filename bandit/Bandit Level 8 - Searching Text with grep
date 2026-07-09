@@ -1,0 +1,113 @@
+# Bandit Level 8 - Searching Text with grep
+
+## Objective
+
+Retrieve the password for the next level. The password is stored in the file `data.txt` next to the word `millionth`.
+
+---
+
+## Skills Practiced
+
+- Searching text inside files
+- Using the `grep` command
+- Reading structured text files
+
+---
+
+## Analysis
+
+The challenge specifies that the password is located **next to the word** `millionth` inside the file `data.txt`.
+
+Instead of manually inspecting the entire file, the `grep` command was used to search for the line containing the target word.
+
+Once the matching line was displayed, the password could be identified immediately.
+
+---
+
+## Solution
+
+Search for the target word:
+
+```bash
+grep "millionth" data.txt
+```
+
+---
+
+## Explanation
+
+### `grep`
+
+Searches for lines matching a specific pattern within a file.
+
+In this challenge:
+
+- `"millionth"` → Pattern to search.
+- `data.txt` → File being searched.
+
+`grep` returns the entire line containing the matching word, making it easy to retrieve the password.
+
+---
+
+## What I Learned
+
+- How to search efficiently inside text files.
+- How to locate information without manually reading large amounts of data.
+- Why `grep` is one of the most commonly used Linux commands.
+
+---
+
+## Real-World Usage
+
+System administrators use `grep` every day to:
+
+- Search log files.
+- Find configuration settings.
+- Investigate errors.
+- Locate IP addresses.
+- Search for usernames.
+- Filter command output.
+
+Examples:
+
+```bash
+grep root /etc/passwd
+
+grep ERROR application.log
+
+grep ssh /var/log/auth.log
+
+grep "Listen" /etc/ssh/sshd_config
+```
+
+---
+
+## Commands Learned
+
+### `grep`
+
+**Purpose**
+
+Search for matching text inside one or more files.
+
+**Syntax**
+
+```bash
+grep "pattern" filename
+```
+
+Example:
+
+```bash
+grep "admin" users.txt
+```
+
+---
+
+## Skills Developed
+
+- Linux Command Line
+- Text Processing
+- Troubleshooting
+- Log Analysis
+- System Administration Fundamentals
