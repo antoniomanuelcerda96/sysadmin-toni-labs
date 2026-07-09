@@ -1,0 +1,160 @@
+# Bandit Level 9 - Finding Unique Lines
+
+## Objective
+
+Retrieve the password for the next level. The password is stored in the file `data.txt` and is the only line that appears exactly once.
+
+---
+
+## Skills Practiced
+
+- Sorting text data
+- Identifying unique lines
+- Using Unix pipelines
+- Combining multiple commands
+
+---
+
+## Analysis
+
+The challenge required finding the only line that appears exactly once in the file.
+
+Since the `uniq` command only detects consecutive duplicate lines, the file first had to be sorted so that identical lines were grouped together.
+
+The output of `sort` was then passed directly to `uniq -u` using a pipe (`|`), which displayed only the unique line containing the password.
+
+---
+
+## Solution
+
+```bash
+sort data.txt | uniq -u
+```
+
+---
+
+## Explanation
+
+### `sort`
+
+Sorts all lines alphabetically.
+
+Sorting ensures that duplicate lines become adjacent, allowing `uniq` to work correctly.
+
+---
+
+### `uniq -u`
+
+Displays only the lines that occur exactly once.
+
+Without sorting first, duplicated lines separated throughout the file would not be detected.
+
+---
+
+### `|` (Pipe)
+
+The pipe operator sends the output of one command directly as the input of another command.
+
+In this challenge:
+
+```text
+data.txt
+    │
+    ▼
+sort
+    │
+    ▼
+uniq -u
+```
+
+---
+
+## What I Learned
+
+- How to combine multiple Linux commands using a pipeline.
+- Why `sort` is often required before using `uniq`.
+- How to process text efficiently without editing files manually.
+
+---
+
+## Real-World Usage
+
+Linux administrators commonly combine `sort` and `uniq` to:
+
+- Find duplicate log entries.
+- Detect unique users.
+- Analyze large datasets.
+- Process command outputs.
+- Generate reports.
+
+Examples:
+
+```bash
+sort users.txt | uniq
+
+sort users.txt | uniq -c
+
+sort access.log | uniq -u
+```
+
+---
+
+## Commands Learned
+
+### `sort`
+
+**Purpose**
+
+Sort lines alphabetically or numerically.
+
+**Syntax**
+
+```bash
+sort <filename>
+```
+
+---
+
+### `uniq`
+
+**Purpose**
+
+Filter repeated lines.
+
+**Syntax**
+
+```bash
+uniq [options]
+```
+
+Useful options:
+
+```bash
+uniq -u
+uniq -c
+uniq -d
+```
+
+---
+
+### `|` (Pipe)
+
+**Purpose**
+
+Pass the output of one command directly into another.
+
+**Syntax**
+
+```bash
+command1 | command2
+```
+
+---
+
+## Skills Developed
+
+- Linux Command Line
+- Text Processing
+- Unix Pipelines
+- Troubleshooting
+- System Administration Fundamentals
